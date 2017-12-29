@@ -1,22 +1,22 @@
 {
-    "name": "azure-virtual-machine-explorer",
-    "displayName": "Azure Virtual Machine Explorer",
-    "description": "Manage Azure Virtual Machine in VS Code",
-    "version": "0.0.2",
-    "publisher": "formulahendry",
+    "name": "azure-key-vault-explorer",
+    "displayName": "Azure Key Vault Explorer",
+    "description": "Manage Azure Key Vault in VS Code",
+    "version": "0.0.0",
+    "publisher": "iricigor",
     "icon": "logo.png",
     "engines": {
-        "vscode": "^1.16.0"
+        "vscode": "^1.19.0"
     },
     "categories": [
         "Azure"
     ],
     "keywords": [
         "Azure",
-        "VM",
-        "Virtual Machine",
+        "KV",
+        "Key Vault",
         "Explorer",
-        "Compute"
+        "Secret"
     ],
     "bugs": {
         "url": "https://github.com/formulahendry/vscode-azure-virtual-machine-explorer/issues",
@@ -28,96 +28,76 @@
         "url": "https://github.com/formulahendry/vscode-azure-virtual-machine-explorer.git"
     },
     "activationEvents": [
-        "onView:azureVirtualMachine"
+        "onView:azureKeyVault"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "views": {
             "explorer": [{
-                "id": "azureVirtualMachine",
-                "name": "Azure Virtual Machine"
+                "id": "azureKeyVault",
+                "name": "Azure Key Vault"
             }]
         },
         "commands": [{
-                "command": "azure-virtual-machine-explorer.refresh",
+                "command": "azure-key-vault-explorer.refresh",
                 "title": "Refresh",
-                "category": "Azure Virtual Machine",
+                "category": "Azure Key Vault",
                 "icon": {
                     "light": "resources/light/refresh.svg",
                     "dark": "resources/dark/refresh.svg"
                 }
             },
             {
-                "command": "azure-virtual-machine-explorer.selectSubscriptions",
+                "command": "azure-key-vault-explorer.selectSubscriptions",
                 "title": "Select Subscriptions",
-                "category": "Azure Virtual Machine",
+                "category": "Azure Key Vault",
                 "icon": {
                     "light": "resources/light/selectSubscriptions.svg",
                     "dark": "resources/dark/selectSubscriptions.svg"
                 }
             },
+            // {
+            //     "command": "azure-virtual-machine-explorer.start",
+            //     "title": "Start",
+            //     "category": "Azure Virtual Machine"
+            // },
             {
-                "command": "azure-virtual-machine-explorer.start",
-                "title": "Start",
-                "category": "Azure Virtual Machine"
-            },
-            {
-                "command": "azure-virtual-machine-explorer.powerOff",
-                "title": "Power Off (Stop)",
-                "category": "Azure Virtual Machine"
-            },
-            {
-                "command": "azure-virtual-machine-explorer.deallocate",
-                "title": "Deallocate (Shut down)",
-                "category": "Azure Virtual Machine"
+                "command": "azure-key-vault-explorer.export",
+                "title": "Export",
+                "category": "Azure Key Vault"
             }
         ],
         "menus": {
             "view/title": [{
-                    "command": "azure-virtual-machine-explorer.refresh",
-                    "when": "view == azureVirtualMachine",
+                    "command": "azure-key-vault-explorer.refresh",
+                    "when": "view == azureKeyVault",
                     "group": "navigation@1"
                 },
                 {
-                    "command": "azure-virtual-machine-explorer.selectSubscriptions",
-                    "when": "view == azureVirtualMachine",
+                    "command": "azure-key-vault-explorer.selectSubscriptions",
+                    "when": "view == azureKeyVault",
                     "group": "navigation@2"
                 }
             ],
             "view/item/context": [{
                     "command": "azure-virtual-machine-explorer.refresh",
-                    "when": "view == azureVirtualMachine && viewItem == subscription",
-                    "group": "azure-virtual-machine@1"
+                    "when": "view == azureKeyVault && viewItem == subscription",
+                    "group": "azure-key-vault@1"
                 },
                 {
-                    "command": "azure-virtual-machine-explorer.start",
-                    "when": "view == azureVirtualMachine && viewItem == virtualMachine",
-                    "group": "azure-virtual-machine@1"
-                },
-                {
-                    "command": "azure-virtual-machine-explorer.powerOff",
-                    "when": "view == azureVirtualMachine && viewItem == virtualMachine",
-                    "group": "azure-virtual-machine@2"
-                },
-                {
-                    "command": "azure-virtual-machine-explorer.deallocate",
-                    "when": "view == azureVirtualMachine && viewItem == virtualMachine",
-                    "group": "azure-virtual-machine@3"
+                    "command": "azure-key-vault-explorer.export",
+                    "when": "view == azureKeyVault && viewItem == keyVault",
+                    "group": "azure-key-vault@1"
                 }
             ]
         },
         "configuration": {
             "type": "object",
-            "title": "Azure Virtual Machine Explorer",
-            "properties": {
-                "azure-virtual-machine-explorer.enableTelemetry": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Whether to enable anonymous usage collection."
-                }
-            }
+            "title": "Azure Key Vault Explorer",
+            "properties": {}   
         }
     },
+    // TODO: Check these things
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
@@ -135,7 +115,6 @@
         "@types/mocha": "^2.2.42"
     },
     "dependencies": {
-        "applicationinsights": "^0.21.0",
         "azure-arm-compute": "^3.0.0-preview",
         "azure-arm-resource": "^2.0.0-preview",
         "ms-rest-azure": "^2.3.1"
