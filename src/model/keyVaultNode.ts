@@ -1,33 +1,29 @@
-
-
-// import computeManagementClient = require("azure-arm-compute");
-import keyvaultClient = require("azure-keyvault")   // https://www.npmjs.com/package/azure-keyvault
+// import keyvaultClient = require("azure-keyvault")   // https://www.npmjs.com/package/azure-keyvault
 
 // general imports
 import * as path from "path";
 import * as vscode from "vscode";
 
-// azure key vault imports
-// TODO: Add imports here, I should install and package them into node_modules folder, see C:\Users\iiric\.vscode-insiders\extensions\formulahendry.azure-virtual-machine-explorer-0.0.2\node_modules
-
-// import * as VirtualMachineModels from "../../node_modules/azure-arm-compute/lib/models";
-// import * as VirtualMachineOperations from "../../node_modules/azure-arm-compute/lib/Operations";
-import { KeyVaultTreeDataProvider } from "../keyVaultTreeDataProvider";
-
 // local imports
+import { KeyVaultTreeDataProvider } from "../keyVaultTreeDataProvider";
 import { INode } from "./INode";
 import { SubscriptionNode } from "./subscriptionNode";
+import { ResourceListResult } from "azure-arm-keyvault/lib/models";
+import { Resource } from "azure-arm-resource/lib/resource/models";
 
 export class KeyVaultNode implements INode {
 
     // TODO: Add Constructor, if needed; check TreeProvider
+    constructor(private readonly keyVault: Resource) {
+        // resource is key vault information containing properties: id, name, type, location, tags
+    }
 
     public async getTreeItem(): Promise<vscode.TreeItem> {
      
         return {
-            label: this.keyVault.name,
+            label: `${this.keyVault.name} (${this.keyVault.location})`,
             contextValue: "keyVault",
-            iconPath: "../../resources/key-vault-16px.png",
+            iconPath: path.join(__filename, "..", "..", "..", "..", "resources", "key-vault-16px.png")
         };
  
     }
@@ -56,7 +52,7 @@ export class KeyVaultNode implements INode {
 
     public export(keyVaultTreeDataProvider: KeyVaultTreeDataProvider): void {
         vscode.window.withProgress({
-            title: `Exporting KV [${this.keyVault.name}]`,
+            title: `Exporting Key Vault: ${this.keyVault.name}`,
             location: vscode.ProgressLocation.Window,
         }, async (progress) => {
             await new Promise((resolve, reject) => {
@@ -64,6 +60,7 @@ export class KeyVaultNode implements INode {
                 // TODO: Add code here, see https://github.com/Azure-Samples/key-vault-node-getting-started
                 
                 // list secrets
+                // export list to file, then remove this test
                 // in loop read all secrets with secrettext
                 // convert to json
                 // open new document and paste json content there

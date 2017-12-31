@@ -1,5 +1,4 @@
-// import computeManagementClient = require("azure-arm-compute");
-import keyvaultClient = require("azure-keyvault")   // https://www.npmjs.com/package/azure-keyvault
+import keyVaultManagementClient  = require("azure-arm-keyvault")
 
 // general imports
 import * as path from "path";
@@ -8,6 +7,7 @@ import * as vscode from "vscode";
 // local imports
 import { AzureAccount, AzureResourceFilter } from "../azure-account.api";
 import { INode } from "./INode";
+import { KeyVaultNode } from "./keyVaultNode";
 // import { VirtualMachineNode } from "./virtualMachineNode";
 
 // class start
@@ -26,23 +26,15 @@ export class SubscriptionNode implements INode {
         };
     }
 
-    // public async getChildren(azureAccount: AzureAccount): Promise<INode[]> {
-    //     const client = new computeManagementClient(this.azureResourceFilter.session.credentials, this.azureResourceFilter.subscription.subscriptionId);
-    //     const nodes = await client.virtualMachines.listAll().then((virtualMachines) => {
-    //         return virtualMachines.map((virtualMachine) => {
-    //             return new VirtualMachineNode(client.virtualMachines, virtualMachine, this);
-    //         });
-    //     });
-    //     return nodes;
-    // }
-
     public async getChildren(azureAccount: AzureAccount): Promise<INode[]> {
 
-        const client = new keyvaultClient(this.azureResourceFilter.session.credentials, this.azureResourceFilter.subscription.subscriptionId);
-   
-        // Add more code
-        
+        //const client = new keyVaultClient(this.azureResourceFilter.session.credentials, this.azureResourceFilter.subscription.subscriptionId);
+        //const client = new KeyVaultManagementClient(this.azureResourceFilter.session.credentials, this.azureResourceFilter.subscription.subscriptionId);
+        const client = new keyVaultManagementClient(this.azureResourceFilter.session.credentials, this.azureResourceFilter.subscription.subscriptionId);
+        const nodes = await client.vaults.list()
 
-
+        return nodes.map((keyVault) => {
+            return new KeyVaultNode(keyVault)
+        })
     }
 }

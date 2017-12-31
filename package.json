@@ -19,13 +19,13 @@
         "Secret"
     ],
     "bugs": {
-        "url": "https://github.com/formulahendry/vscode-azure-virtual-machine-explorer/issues",
-        "email": "formulahendry@gmail.com"
+        "url": "https://github.com/iricigor/vscode-azure-key-vault-explorer/issues",
+        "email": "iricigor@gmail.com"
     },
-    "homepage": "https://github.com/formulahendry/vscode-azure-virtual-machine-explorer/blob/master/README.md",
+    "homepage": "https://github.com/iricigor/vscode-azure-key-vault-explorer/blob/master/README.md",
     "repository": {
         "type": "git",
-        "url": "https://github.com/formulahendry/vscode-azure-virtual-machine-explorer.git"
+        "url": "https://github.com/iricigor/vscode-azure-key-vault-explorer.git"
     },
     "activationEvents": [
         "onView:azureKeyVault"
@@ -33,12 +33,15 @@
     "main": "./out/src/extension",
     "contributes": {
         "views": {
-            "explorer": [{
-                "id": "azureKeyVault",
-                "name": "Azure Key Vault"
-            }]
+            "explorer": [
+                {
+                    "id": "azureKeyVault",
+                    "name": "Azure Key Vault"
+                }
+            ]
         },
-        "commands": [{
+        "commands": [
+            {
                 "command": "azure-key-vault-explorer.refresh",
                 "title": "Refresh",
                 "category": "Azure Key Vault",
@@ -56,11 +59,6 @@
                     "dark": "resources/dark/selectSubscriptions.svg"
                 }
             },
-            // {
-            //     "command": "azure-virtual-machine-explorer.start",
-            //     "title": "Start",
-            //     "category": "Azure Virtual Machine"
-            // },
             {
                 "command": "azure-key-vault-explorer.export",
                 "title": "Export",
@@ -68,7 +66,8 @@
             }
         ],
         "menus": {
-            "view/title": [{
+            "view/title": [
+                {
                     "command": "azure-key-vault-explorer.refresh",
                     "when": "view == azureKeyVault",
                     "group": "navigation@1"
@@ -79,7 +78,8 @@
                     "group": "navigation@2"
                 }
             ],
-            "view/item/context": [{
+            "view/item/context": [
+                {
                     "command": "azure-virtual-machine-explorer.refresh",
                     "when": "view == azureKeyVault && viewItem == subscription",
                     "group": "azure-key-vault@1"
@@ -94,10 +94,9 @@
         "configuration": {
             "type": "object",
             "title": "Azure Key Vault Explorer",
-            "properties": {}   
+            "properties": {}
         }
     },
-    // TODO: Check these things
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
@@ -115,9 +114,10 @@
         "@types/mocha": "^2.2.42"
     },
     "dependencies": {
-        "azure-arm-compute": "^3.0.0-preview",
-        "azure-arm-resource": "^2.0.0-preview",
-        "ms-rest-azure": "^2.3.1"
+        "azure-arm-keyvault": "^1.1.0-preview",
+        "azure-arm-resource": "^3.0.0-preview",
+        "azure-keyvault": "^2.0.1-preview",
+        "ms-rest-azure": "^2.5.0"
     },
     "extensionDependencies": [
         "ms-vscode.azure-account"
