@@ -2,16 +2,15 @@
 
 Azure Key Vault Explorer for VS Code.
 
-## TODO
+## TODO list
 
-* Check for mentioning of "machine" or "virtual machine"
-* Add Class for KeyVaultNode
 * Implement Export command
-* change KV icon to be transparent
-* Change Export to Export Secrets
+* Recheck all imports
+* Change KV icon to be transparent
 * Later implement Export Keys, etc.
+* Implement logout from azure (there is command for that)
 * Check other things...
-* 
+ 
 ## Helpful pages (for me)
 * https://github.com/formulahendry/vscode-azure-storage-explorer
 
@@ -33,6 +32,11 @@ Azure Key Vault Explorer for VS Code.
 
 2. After sign-in, click the `+` button to select Azure Subscription
 3. Wait for a moment, the Key Vault list will be shown
+4. Right click on key vault and select *Export Secrets*
+
+ ![export-secrets](images/ExportSecrets.png)
+
+5. All secrets, including their secret text will appear after some time as new document
 
 TODO: add screenshot
 

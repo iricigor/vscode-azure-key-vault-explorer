@@ -8,7 +8,6 @@ import * as vscode from "vscode";
 import { AzureAccount, AzureResourceFilter } from "../azure-account.api";
 import { INode } from "./INode";
 import { KeyVaultNode } from "./keyVaultNode";
-// import { VirtualMachineNode } from "./virtualMachineNode";
 
 // class start
 
@@ -31,10 +30,11 @@ export class SubscriptionNode implements INode {
         //const client = new keyVaultClient(this.azureResourceFilter.session.credentials, this.azureResourceFilter.subscription.subscriptionId);
         //const client = new KeyVaultManagementClient(this.azureResourceFilter.session.credentials, this.azureResourceFilter.subscription.subscriptionId);
         const client = new keyVaultManagementClient(this.azureResourceFilter.session.credentials, this.azureResourceFilter.subscription.subscriptionId);
+        console.log("reading key vaults")
         const nodes = await client.vaults.list()
 
         return nodes.map((keyVault) => {
-            return new KeyVaultNode(keyVault)
+            return new KeyVaultNode(keyVault, this.azureResourceFilter)
         })
     }
 }

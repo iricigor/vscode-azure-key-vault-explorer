@@ -61,7 +61,7 @@
             },
             {
                 "command": "azure-key-vault-explorer.export",
-                "title": "Export",
+                "title": "Export Secrets",
                 "category": "Azure Key Vault"
             }
         ],
@@ -80,7 +80,7 @@
             ],
             "view/item/context": [
                 {
-                    "command": "azure-virtual-machine-explorer.refresh",
+                    "command": "azure-key-vault-explorer.refresh",
                     "when": "view == azureKeyVault && viewItem == subscription",
                     "group": "azure-key-vault@1"
                 },

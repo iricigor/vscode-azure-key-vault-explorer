@@ -1,4 +1,4 @@
-## 0.0.1 (TBA)
+## 0.1.0 (TBA)
 * Initial Release
 
 ## 0.0.0 (29-Dec-2017)
